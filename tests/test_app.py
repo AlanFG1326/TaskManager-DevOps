@@ -89,6 +89,17 @@ def test_editar_inexistente(client):
     assert client.put("/api/tasks/5", json={"nombre": "x"}).status_code == 404
 
 
+# CP05
+def test_cp05_eliminar_tarea(client):
+    crear(client)
+    assert client.delete("/api/tasks/1").status_code == 204
+    assert client.get("/api/tasks").get_json() == []
+
+
+def test_eliminar_inexistente(client):
+    assert client.delete("/api/tasks/7").status_code == 404
+
+
 # Operación
 def test_health(client):
     r = client.get("/health")
