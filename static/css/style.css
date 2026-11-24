@@ -1,0 +1,30 @@
+:root { --azul:#1f4e8c; --gris:#f3f5f8; --borde:#d5dbe3; --texto:#1c2430; }
+* { box-sizing: border-box; }
+body { margin:0; font-family: system-ui, "Segoe UI", sans-serif; background:var(--gris); color:var(--texto); }
+header { background:var(--azul); color:#fff; padding:1.2rem 1.5rem; }
+header h1 { margin:0; font-size:1.6rem; }
+header p { margin:.2rem 0 0; opacity:.85; }
+main { max-width:1000px; margin:1.5rem auto; padding:0 1rem; display:grid; gap:1.2rem; grid-template-columns: 1fr 1.4fr; }
+@media (max-width:760px) { main { grid-template-columns:1fr; } }
+.card { background:#fff; border:1px solid var(--borde); border-radius:10px; padding:1.1rem; }
+h2 { margin-top:0; font-size:1.15rem; }
+label { display:block; font-weight:600; margin-bottom:.8rem; }
+input, textarea, select { width:100%; margin-top:.25rem; padding:.55rem; border:1px solid var(--borde); border-radius:6px; font:inherit; }
+button { background:var(--azul); color:#fff; border:0; border-radius:6px; padding:.55rem 1rem; font:inherit; cursor:pointer; }
+button.secundario { background:#6b7684; }
+button.peligro { background:#b3261e; }
+button.mini { padding:.3rem .6rem; font-size:.85rem; }
+.acciones { display:flex; gap:.5rem; }
+#mensaje { min-height:1.2rem; margin:.7rem 0 0; font-weight:600; }
+#mensaje.ok { color:#1b7a3a; } #mensaje.error { color:#b3261e; }
+.encabezado-lista { display:flex; justify-content:space-between; align-items:center; gap:1rem; }
+.encabezado-lista select { width:auto; margin:0; }
+ul { list-style:none; margin:0; padding:0; display:grid; gap:.7rem; }
+li.tarea { border:1px solid var(--borde); border-left-width:6px; border-radius:8px; padding:.7rem .8rem; }
+li.alta { border-left-color:#c62828; } li.media { border-left-color:#ef9a1a; } li.baja { border-left-color:#2e8b57; }
+li.terminada .nombre { text-decoration:line-through; opacity:.6; }
+.nombre { font-weight:700; }
+.meta { font-size:.8rem; color:#566; margin:.2rem 0 .5rem; }
+.fila { display:flex; flex-wrap:wrap; gap:.4rem; align-items:center; }
+.fila select { width:auto; margin:0; padding:.3rem; }
+.vacio { color:#566; text-align:center; }
