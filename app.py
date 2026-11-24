@@ -94,6 +94,28 @@ def create_app(db_path=None):
             }
         ), (200 if db_ok else 503)
 
+    @app.get("/api/tasks")
+    def listar():
+        rows = get_db().execute("SELECT * FROM tasks ORDER BY id DESC").fetchall()
+        return jsonify([dict(r) for r in rows])
+
+    @app.get("/api/tasks/<int:task_id>")
+    def obtener(task_id):
+        row = fila(task_id)
+        return jsonify(dict(row)) if row else error("Tarea no encontrada.", 404)
+
+    @app.post("/api/tasks")
+    def crear():
+        datos, msg = validar(request.get_json(silent=True))
+        if msg:
+            return error(msg)
+        cur = get_db().execute(
+            "INSERT INTO tasks (nombre, descripcion, prioridad) VALUES (?, ?, ?)",
+            (datos["nombre"], datos.get("descripcion", ""), datos.get("prioridad", "media")),
+        )
+        get_db().commit()
+        return jsonify(dict(fila(cur.lastrowid))), 201
+
     return app
 
 
