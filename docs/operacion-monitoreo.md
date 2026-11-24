@@ -13,7 +13,7 @@
 | Fecha | Entorno | Disponibilidad | Latencia `GET /api/tasks` (50 solicitudes) | Latencia `/health` | Errores | Observaciones |
 |-------|---------|----------------|---------------------------------------------|--------------------|---------|---------------|
 | 24/11/2026 | Local (flask run) | OK | media 3.5 ms · máx 4.3 ms | 3 ms | 0 | Línea base previa al despliegue |
-| _pendiente_ | Producción (URL pública) | | | | | Completar tras el despliegue (ver README) |
+| 24/11/2026 | Producción: https://taskmanager-devops-2xhx.onrender.com (Render, plan gratuito) | OK | media 513.8 ms · máx 1639.1 ms | 814 ms (primera medición 442 ms) | 0 | 12/12 verificaciones aprobadas; latencia mayor que en local por red y plan gratuito (cumple < 2 s; supera el criterio de 500 ms en promedio) |
 
 ## 3. Registro de incidencias
 Las incidencias se documentan como GitHub Issues con la plantilla `.github/ISSUE_TEMPLATE/incidencia.md` (fecha de detección, funcionalidad afectada, descripción, evidencia, responsable, solución).

@@ -1,6 +1,6 @@
 # Despliegue en Render (Fase 6)
 
-> Estado: **configuración lista; despliegue pendiente** de que el equipo cree/conecte su cuenta de Render (requiere cuenta y autorización de GitHub del equipo).
+> Estado: **desplegado** el 24/11/2026 en https://taskmanager-devops-2xhx.onrender.com (estado Live). Verificación funcional: 12/12 aprobadas.
 
 ## Pasos
 1. Crear cuenta en https://render.com e iniciar sesión con GitHub.

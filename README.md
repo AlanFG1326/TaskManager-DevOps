@@ -48,4 +48,6 @@ render.yaml, Procfile      Configuración de despliegue (Render / plataformas ti
 7. **Operate/Monitor:** `docs/operacion-monitoreo.md`.
 
 ## Despliegue
+URL pública: https://taskmanager-devops-2xhx.onrender.com
+
 Ver `docs/despliegue.md`.
