@@ -100,6 +100,22 @@ def test_eliminar_inexistente(client):
     assert client.delete("/api/tasks/7").status_code == 404
 
 
+# CP06
+@pytest.mark.parametrize("estado", ["pendiente", "en proceso", "terminada"])
+def test_cp06_cambiar_estado(client, estado):
+    crear(client)
+    r = client.patch("/api/tasks/1/status", json={"estado": estado})
+    assert r.status_code == 200
+    assert client.get("/api/tasks/1").get_json()["estado"] == estado
+
+
+def test_estado_invalido(client):
+    crear(client)
+    assert client.patch("/api/tasks/1/status", json={"estado": "volando"}).status_code == 400
+    assert client.patch("/api/tasks/1/status", json={}).status_code == 400
+    assert client.patch("/api/tasks/9/status", json={"estado": "terminada"}).status_code == 404
+
+
 # Operación
 def test_health(client):
     r = client.get("/health")
