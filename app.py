@@ -129,6 +129,14 @@ def create_app(db_path=None):
             get_db().commit()
         return jsonify(dict(fila(task_id)))
 
+    @app.delete("/api/tasks/<int:task_id>")
+    def eliminar(task_id):
+        if not fila(task_id):
+            return error("Tarea no encontrada.", 404)
+        get_db().execute("DELETE FROM tasks WHERE id = ?", (task_id,))
+        get_db().commit()
+        return "", 204
+
     return app
 
 
