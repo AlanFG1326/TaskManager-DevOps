@@ -116,6 +116,19 @@ def create_app(db_path=None):
         get_db().commit()
         return jsonify(dict(fila(cur.lastrowid))), 201
 
+    @app.put("/api/tasks/<int:task_id>")
+    def editar(task_id):
+        if not fila(task_id):
+            return error("Tarea no encontrada.", 404)
+        datos, msg = validar(request.get_json(silent=True), parcial=True)
+        if msg:
+            return error(msg)
+        if datos:
+            sets = ", ".join(f"{k} = ?" for k in datos)
+            get_db().execute(f"UPDATE tasks SET {sets} WHERE id = ?", (*datos.values(), task_id))
+            get_db().commit()
+        return jsonify(dict(fila(task_id)))
+
     return app
 
 
