@@ -129,6 +129,20 @@ def create_app(db_path=None):
             get_db().commit()
         return jsonify(dict(fila(task_id)))
 
+    @app.patch("/api/tasks/<int:task_id>/status")
+    def cambiar_estado(task_id):
+        if not fila(task_id):
+            return error("Tarea no encontrada.", 404)
+        body = request.get_json(silent=True)
+        if not isinstance(body, dict) or "estado" not in body:
+            return error("Se requiere el campo estado.")
+        datos, msg = validar({"estado": body["estado"]}, parcial=True)
+        if msg:
+            return error(msg)
+        get_db().execute("UPDATE tasks SET estado = ? WHERE id = ?", (datos["estado"], task_id))
+        get_db().commit()
+        return jsonify(dict(fila(task_id)))
+
     @app.delete("/api/tasks/<int:task_id>")
     def eliminar(task_id):
         if not fila(task_id):
