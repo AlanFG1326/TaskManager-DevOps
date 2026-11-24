@@ -116,6 +116,17 @@ def test_estado_invalido(client):
     assert client.patch("/api/tasks/9/status", json={"estado": "terminada"}).status_code == 404
 
 
+# CP07
+@pytest.mark.parametrize("prioridad", ["alta", "media", "baja"])
+def test_cp07_seleccionar_prioridad(client, prioridad):
+    r = crear(client, prioridad=prioridad)
+    assert r.get_json()["prioridad"] == prioridad
+
+
+def test_prioridad_invalida(client):
+    assert crear(client, prioridad="urgente").status_code == 400
+
+
 # Operación
 def test_health(client):
     r = client.get("/health")
