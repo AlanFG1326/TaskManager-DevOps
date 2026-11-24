@@ -71,6 +71,24 @@ def test_consultar_tarea_por_id(client):
     assert client.get("/api/tasks/99").status_code == 404
 
 
+# CP04
+def test_cp04_editar_tarea(client):
+    crear(client)
+    r = client.put("/api/tasks/1", json={"nombre": "Nuevo nombre", "descripcion": "Otra", "prioridad": "baja"})
+    assert r.status_code == 200
+    t = r.get_json()
+    assert (t["nombre"], t["descripcion"], t["prioridad"]) == ("Nuevo nombre", "Otra", "baja")
+
+
+def test_editar_con_nombre_vacio_falla(client):
+    crear(client)
+    assert client.put("/api/tasks/1", json={"nombre": " "}).status_code == 400
+
+
+def test_editar_inexistente(client):
+    assert client.put("/api/tasks/5", json={"nombre": "x"}).status_code == 404
+
+
 # Operación
 def test_health(client):
     r = client.get("/health")
