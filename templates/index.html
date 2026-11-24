@@ -1,3 +1,58 @@
 <!DOCTYPE html>
-<html lang="es"><head><meta charset="UTF-8"><title>TaskManager</title></head>
-<body><h1>TaskManager</h1><p>En construcción.</p></body></html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TaskManager</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <header>
+    <h1>TaskManager</h1>
+    <p>TechSolutions &middot; Gestión centralizada de tareas</p>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2 id="form-titulo">Nueva tarea</h2>
+      <form id="task-form" novalidate>
+        <input type="hidden" id="task-id">
+        <label>Nombre
+          <input id="nombre" maxlength="100" placeholder="Ej. Elaborar documentación" required>
+        </label>
+        <label>Descripción
+          <textarea id="descripcion" rows="3" placeholder="Detalle de la actividad"></textarea>
+        </label>
+        <label>Prioridad
+          <select id="prioridad">
+            <option value="alta">Alta</option>
+            <option value="media" selected>Media</option>
+            <option value="baja">Baja</option>
+          </select>
+        </label>
+        <div class="acciones">
+          <button type="submit" id="guardar">Guardar tarea</button>
+          <button type="button" id="cancelar" class="secundario" hidden>Cancelar edición</button>
+        </div>
+        <p id="mensaje" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <section class="card">
+      <div class="encabezado-lista">
+        <h2>Tareas</h2>
+        <select id="filtro" aria-label="Filtrar por estado">
+          <option value="">Todos los estados</option>
+          <option value="pendiente">Pendiente</option>
+          <option value="en proceso">En proceso</option>
+          <option value="terminada">Terminada</option>
+        </select>
+      </div>
+      <ul id="lista"></ul>
+      <p id="vacio" class="vacio" hidden>No hay tareas registradas.</p>
+    </section>
+  </main>
+
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
